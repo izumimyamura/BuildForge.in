@@ -8,13 +8,11 @@ const StaggeredMenu = ({
   displaySocials = false,
   displayItemNumbering = false,
   menuButtonColor = '#ffffff',
-  openMenuButtonColor = '#fff',
+  openMenuButtonColor = '#000000',
   changeMenuColorOnOpen = true,
-  colors = ['#B497CF', '#5227FF'],
+  colors = ['#1a1a1a', '#000000'],
   logoUrl = '',
   accentColor = '#5227FF',
-  onMenuOpen,
-  onMenuClose
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
@@ -24,53 +22,55 @@ const StaggeredMenu = ({
   const tl = useRef(null);
 
   useEffect(() => {
-    // Initialize GSAP Timeline
-    tl.current = gsap.timeline({ paused: true });
+    // gsap.context() guarantees React 18 / Vite strict-mode compatibility
+    const ctx = gsap.context(() => {
+      tl.current = gsap.timeline({ paused: true });
 
-    // Animate background color layers (prelayers)
-    if (prelayersRef.current.length > 0) {
-      tl.current.to(prelayersRef.current, {
-        x: 0,
-        opacity: 1,
+      const xPercent = position === 'right' ? 100 : -100;
+
+      // 1. Setup and animate background layers
+      if (prelayersRef.current.length > 0) {
+        gsap.set(prelayersRef.current, { xPercent: xPercent, opacity: 1 });
+        tl.current.to(prelayersRef.current, {
+          xPercent: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: 'power3.inOut'
+        });
+      }
+
+      // 2. Setup and animate main panel
+      gsap.set(panelRef.current, { xPercent: xPercent, opacity: 1 });
+      tl.current.to(panelRef.current, {
+        xPercent: 0,
         duration: 0.5,
-        stagger: 0.1,
         ease: 'power3.inOut'
-      });
-    }
+      }, "-=0.3");
 
-    // Animate main menu panel
-    tl.current.to(panelRef.current, {
-      x: 0,
-      opacity: 1,
-      duration: 0.5,
-      ease: 'power3.inOut'
-    }, "-=0.3");
+      // 3. Setup and animate menu text items
+      gsap.set(itemsRef.current, { y: 30, opacity: 0 });
+      tl.current.to(itemsRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.05,
+        ease: 'power2.out'
+      }, "-=0.2");
+    }, containerRef);
 
-    // Animate text links staggering in
-    tl.current.fromTo(itemsRef.current, 
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.4, stagger: 0.05, ease: 'power2.out' },
-      "-=0.2"
-    );
-
-    return () => {
-      tl.current.kill();
-    };
-  }, []);
+    // Cleanup timeline on unmount
+    return () => ctx.revert(); 
+  }, [position]);
 
   useEffect(() => {
-    // Play or reverse animation based on isOpen state
-    if (isOpen) {
-      tl.current.play();
-      if (onMenuOpen) onMenuOpen();
-    } else {
-      tl.current.reverse();
-      if (onMenuClose) onMenuClose();
+    if (tl.current) {
+      if (isOpen) {
+        tl.current.play();
+      } else {
+        tl.current.reverse();
+      }
     }
   }, [isOpen]);
-
-  // Determine starting transform based on menu position
-  const initialTransform = position === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
 
   return (
     <div 
@@ -88,11 +88,15 @@ const StaggeredMenu = ({
           {logoUrl && <img src={logoUrl} alt="Logo" className="sm-logo-img" />}
         </div>
         
-        {/* Menu Toggle Button */}
+        {/* Added pointerEvents: 'auto' directly to ensure it stays clickable */}
         <button 
           className="sm-toggle" 
           onClick={() => setIsOpen(!isOpen)}
-          style={{ color: isOpen && changeMenuColorOnOpen ? openMenuButtonColor : menuButtonColor }}
+          style={{ 
+            color: isOpen && changeMenuColorOnOpen ? openMenuButtonColor : menuButtonColor,
+            pointerEvents: 'auto',
+            zIndex: 100
+          }}
         >
           <div className="sm-toggle-textWrap">
             <span className="sm-toggle-textInner" style={{ fontWeight: 600 }}>
@@ -104,38 +108,34 @@ const StaggeredMenu = ({
                className="sm-icon-line" 
                style={{ 
                  transform: isOpen ? 'translate(-50%, -50%) rotate(45deg)' : 'translate(-50%, -50%) translateY(-4px)',
-                 transition: 'transform 0.3s ease'
+                 transition: 'transform 0.3s ease',
+                 backgroundColor: 'currentColor'
                }}
              ></span>
              <span 
                className="sm-icon-line" 
                style={{ 
                  transform: isOpen ? 'translate(-50%, -50%) rotate(-45deg)' : 'translate(-50%, -50%) translateY(4px)',
-                 transition: 'transform 0.3s ease'
+                 transition: 'transform 0.3s ease',
+                 backgroundColor: 'currentColor'
                }}
              ></span>
           </div>
         </button>
       </header>
 
-      {/* Decorative colored pre-layers */}
       <div className="sm-prelayers">
         {colors.map((color, i) => (
           <div 
             key={i} 
             className="sm-prelayer" 
-            style={{ backgroundColor: color, transform: initialTransform }}
-            ref={el => prelayersRef.current[i] = el}
+            style={{ backgroundColor: color }}
+            ref={el => { if (el) prelayersRef.current[i] = el; }}
           />
         ))}
       </div>
 
-      {/* Main Menu Panel */}
-      <div 
-        className="staggered-menu-panel" 
-        ref={panelRef}
-        style={{ transform: initialTransform }}
-      >
+      <div className="staggered-menu-panel" ref={panelRef}>
         <div className="sm-panel-inner">
           <ul className="sm-panel-list" data-numbering={displayItemNumbering}>
             {items.map((item, i) => (
@@ -148,7 +148,7 @@ const StaggeredMenu = ({
                 >
                   <span 
                     className="sm-panel-itemLabel"
-                    ref={el => itemsRef.current[i] = el}
+                    ref={el => { if (el) itemsRef.current[i] = el; }}
                   >
                     {item.label}
                   </span>
@@ -159,7 +159,7 @@ const StaggeredMenu = ({
 
           {displaySocials && (
             <div className="sm-socials">
-              <h4 className="sm-socials-title">Socials</h4>
+              <h4 className="sm-socials-title">Connect</h4>
               <ul className="sm-socials-list">
                 {socialItems.map((item, i) => (
                   <li key={i}>
