@@ -13,9 +13,10 @@ interface Project {
 }
 
 const projects: Project[] = [
-  { id: 1, title: "Forensic Wallah", cat: "Strategy · Content · Growth", impact: "83K+ Views", img: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2670&auto=format&fit=crop" },
-  { id: 2, title: "RCET Prep", cat: "Education & Growth", impact: "Student-First", img: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2670&auto=format&fit=crop" },
-  { id: 3, title: "Wingmann", cat: "Consumer Tech & Community", impact: "Intentional Connection", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop" },
+  { id: 1, title: "Forensic Wallah", cat: "Extended Marketing Wing", impact: "83K+ Views / 1 Month", img: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2670&auto=format&fit=crop" },
+  { id: 2, title: "RCET Prep Academy", cat: "Education / Content / Growth", impact: "Student-First", img: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2670&auto=format&fit=crop" },
+  { id: 3, title: "Wingmann", cat: "Brand / Content / Growth", impact: "Intentional. Curated. Human.", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop" },
+  { id: 4, title: "Confidential - UAE", cat: "Medical Training / Healthcare", impact: "Strategy / Brand / Marketing", img: "https://images.unsplash.com/photo-1515462277126-2dd0c162007a?q=80&w=2670&auto=format&fit=crop" }
 ];
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
@@ -29,12 +30,12 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
         />
         <div className="absolute inset-0 bg-black/40 group-hover:opacity-0 transition-opacity duration-500"></div>
       </div>
-      <div className="flex justify-between items-end border-b border-white/20 pb-4">
-        <div>
-          <h3 className="text-3xl md:text-5xl font-heading mb-1">{project.title}</h3>
-          <span className="text-sm font-mono text-gray-400">{project.cat}</span>
+      <div className="flex justify-between items-start border-b border-white/20 pb-4">
+        <div className="pr-4">
+          <h3 className="text-3xl md:text-4xl font-heading mb-1">{project.title}</h3>
+          <span className="text-xs md:text-sm font-mono text-gray-400">{project.cat}</span>
         </div>
-        <span className="text-sm font-mono text-right">{project.impact}</span>
+        <span className="text-xs md:text-sm font-mono text-right shrink-0">{project.impact}</span>
       </div>
     </div>
   );
@@ -97,10 +98,10 @@ export default function WorkGallery() {
       <div className="container">
         <div className="mb-24 flex flex-col items-center text-center">
            <h2 className="text-[10vw] leading-[0.8] font-heading font-black mix-blend-exclusion z-10">
-             BUILDING
+             SELECTED
            </h2>
            <h2 className="text-[10vw] leading-[0.8] font-heading font-black text-transparent stroke-text z-10 -mt-4 md:-mt-10">
-             WITH
+             WORK
            </h2>
         </div>
 
