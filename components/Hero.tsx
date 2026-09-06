@@ -47,7 +47,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#050505] text-[#e1e1e1]">
+    <section ref={containerRef} className="relative min-h-screen w-full overflow-hidden bg-[#050505] text-[#e1e1e1] flex flex-col">
       <div className="hero-bg absolute inset-0 z-0 opacity-40">
          <img 
            src="https://images.unsplash.com/photo-1618172193763-c511deb635ca?q=80&w=2864&auto=format&fit=crop" 
@@ -58,8 +58,10 @@ export default function Hero() {
          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
       </div>
 
-      <div className="relative z-10 w-full h-full flex flex-col justify-between p-4 sm:p-6 md:p-12">
-        <div className="flex justify-between items-start hero-fade mt-16 md:mt-20">
+      <div className="relative z-10 w-full flex-1 flex flex-col justify-between p-4 sm:p-6 md:p-12 pt-24 md:pt-28">
+        
+        {/* Top Header Section */}
+        <div className="flex justify-between items-start hero-fade">
            <div className="flex flex-col gap-2 md:gap-3">
              <div className="text-[10px] md:text-xs font-mono uppercase tracking-widest opacity-60">
                ( Est. 2024 )
@@ -85,20 +87,23 @@ export default function Hero() {
            </div>
         </div>
 
-        <div className="relative mb-8 md:mb-12">
-          {/* Stacked Massive Typography */}
-          <div className="flex flex-col leading-[0.85] font-heading font-black tracking-tight uppercase mb-4">
+        {/* Bottom Typography & Details Section */}
+        <div className="relative mt-auto mb-4 md:mb-8">
+          
+          {/* Stacked Massive Typography - Resized to fit screen perfectly */}
+          <div className="flex flex-col leading-[0.85] font-heading font-black tracking-tight uppercase mb-8 md:mb-10 w-full">
             {/* Line 1: BUILDFORGE */}
             <div className="overflow-hidden">
-              <div className="flex text-[11.5vw] sm:text-[11vw] text-white">
+              <div className="text-[12vw] sm:text-[9.5vw] md:text-[8.5vw] text-white whitespace-nowrap">
                 {"BUILDFORGE".split("").map((char, i) => (
                   <span key={`bf-${i}`} className="hero-char inline-block origin-bottom will-change-transform">{char}</span>
                 ))}
               </div>
             </div>
-            {/* Line 2: NETWORK (Stylized as hollow/stroke text to look premium) */}
+            
+            {/* Line 2: NETWORK (Hollow/Stroke text) */}
             <div className="overflow-hidden">
-              <div className="flex text-[11.5vw] sm:text-[11vw] text-transparent stroke-text ml-1 md:ml-2">
+              <div className="text-[12vw] sm:text-[9.5vw] md:text-[8.5vw] text-transparent stroke-text whitespace-nowrap ml-1 md:ml-2">
                 {"NETWORK".split("").map((char, i) => (
                   <span key={`nw-${i}`} className="hero-char inline-block origin-bottom will-change-transform">{char}</span>
                 ))}
@@ -106,12 +111,12 @@ export default function Hero() {
             </div>
           </div>
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between mt-6 md:mt-12 border-t border-white/20 pt-4 md:pt-8 hero-fade gap-4 md:gap-6">
-            <div className="flex-1 max-w-2xl">
-              <p className="text-sm sm:text-base md:text-xl lg:text-2xl font-serif-italic text-gray-300 leading-snug mb-4 md:mb-6">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between border-t border-white/20 pt-6 md:pt-8 hero-fade gap-6 md:gap-8">
+            <div className="flex-1 max-w-3xl">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-serif-italic text-gray-300 leading-snug mb-6 md:mb-8">
                 "Ideas are easy. Building them isn't. You don't need more vendors. You need one team that gets it."
               </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 text-[10px] md:text-xs font-mono uppercase tracking-wider opacity-70">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-[10px] md:text-xs font-mono uppercase tracking-wider opacity-70">
                 <div>
                   <div className="text-white/40 mb-1">Wing 01</div>
                   <div>Strategy</div>
@@ -132,6 +137,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
+        
       </div>
     </section>
   );
