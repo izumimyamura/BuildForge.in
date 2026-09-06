@@ -6,7 +6,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -17,7 +16,7 @@ export default function Hero() {
       tl.to(".hero-char", {
         yPercent: 0,
         rotateZ: 0,
-        stagger: 0.05,
+        stagger: 0.04,
         duration: 1.2,
         ease: "power4.out",
         delay: 0.5
@@ -46,9 +45,6 @@ export default function Hero() {
 
     return () => ctx.revert();
   }, []);
-
-  // Updated Title
-  const title = "BUILDFORGE NETWORK";
 
   return (
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#050505] text-[#e1e1e1]">
@@ -82,7 +78,7 @@ export default function Hero() {
                Global / Remote
              </div>
              <div className="flex gap-2 mt-2">
-               <a href="mailto:ceo@buildforge.site" className="px-4 h-8 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors text-xs">
+               <a href="mailto:ceo@squadranlabs.in" className="px-4 h-8 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors text-xs">
                  EMAIL
                </a>
              </div>
@@ -90,18 +86,25 @@ export default function Hero() {
         </div>
 
         <div className="relative mb-8 md:mb-12">
-          {/* Reduced text sizes and added whitespace-nowrap so it never breaks to two lines */}
-          <h1 ref={titleRef} className="text-[5.5vw] sm:text-[5vw] md:text-[4.5vw] leading-[1.1] font-heading font-black tracking-tight text-white whitespace-nowrap">
-            {/* Switched to flex-nowrap */}
-            <div className="flex flex-nowrap">
-              {title.split("").map((char, i) => (
-                <span key={i} className="hero-char inline-block origin-bottom will-change-transform">
-                  {/* Convert actual spaces into non-breaking spaces so GSAP treats them as visible elements */}
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
+          {/* Stacked Massive Typography */}
+          <div className="flex flex-col leading-[0.85] font-heading font-black tracking-tight uppercase mb-4">
+            {/* Line 1: BUILDFORGE */}
+            <div className="overflow-hidden">
+              <div className="flex text-[11.5vw] sm:text-[11vw] text-white">
+                {"BUILDFORGE".split("").map((char, i) => (
+                  <span key={`bf-${i}`} className="hero-char inline-block origin-bottom will-change-transform">{char}</span>
+                ))}
+              </div>
             </div>
-          </h1>
+            {/* Line 2: NETWORK (Stylized as hollow/stroke text to look premium) */}
+            <div className="overflow-hidden">
+              <div className="flex text-[11.5vw] sm:text-[11vw] text-transparent stroke-text ml-1 md:ml-2">
+                {"NETWORK".split("").map((char, i) => (
+                  <span key={`nw-${i}`} className="hero-char inline-block origin-bottom will-change-transform">{char}</span>
+                ))}
+              </div>
+            </div>
+          </div>
           
           <div className="flex flex-col md:flex-row md:items-end justify-between mt-6 md:mt-12 border-t border-white/20 pt-4 md:pt-8 hero-fade gap-4 md:gap-6">
             <div className="flex-1 max-w-2xl">
