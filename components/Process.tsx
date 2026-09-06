@@ -9,17 +9,22 @@ const steps = [
   {
     num: "01",
     title: "THINK",
-    desc: "Understand before creating. We focus on rigorous research, market understanding, positioning, strategy, and comprehensive Go-to-market direction."
+    desc: "Find the angle. We dive deep into Positioning, Go-to-Market, and Growth Strategy."
   },
   {
     num: "02",
     title: "BUILD",
-    desc: "Turn direction into something real. We deploy high-fidelity brand identity, creative messaging, digital experiences, UI/UX, and technology automation."
+    desc: "Make the work. Brand Identity, Creative, Content, Web, and UI/UX."
   },
   {
     num: "03",
     title: "GROW",
-    desc: "Put it in front of the right people. We drive acquisition through content, social campaigns, performance marketing, and community distribution."
+    desc: "Make it move. Social, Digital, Performance, Acquisition, and Analytics."
+  },
+  {
+    num: "04",
+    title: "ITERATE",
+    desc: "Insight -> Idea -> Creative -> Distribution -> Data -> Iteration."
   }
 ];
 
@@ -51,7 +56,7 @@ export default function Process() {
             THE<br/>APPROACH
           </h2>
           <p className="max-w-md text-lg mt-8 md:mt-0 font-medium process-title">
-            The deliverable follows the problem — not the other way around.
+            Start with the problem. Then build the work around it.
           </p>
         </div>
 
