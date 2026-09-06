@@ -47,7 +47,8 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  const title = "BUILDFORGE";
+  // Updated Title
+  const title = "BUILDFORGE NETWORK";
 
   return (
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#050505] text-[#e1e1e1]">
@@ -89,10 +90,15 @@ export default function Hero() {
         </div>
 
         <div className="relative mb-8 md:mb-12">
-          <h1 ref={titleRef} className="text-[12vw] sm:text-[10vw] md:text-[9vw] leading-[1.1] font-heading font-black tracking-tight text-white">
-            <div className="flex flex-wrap">
+          {/* Reduced text sizes and added whitespace-nowrap so it never breaks to two lines */}
+          <h1 ref={titleRef} className="text-[5.5vw] sm:text-[5vw] md:text-[4.5vw] leading-[1.1] font-heading font-black tracking-tight text-white whitespace-nowrap">
+            {/* Switched to flex-nowrap */}
+            <div className="flex flex-nowrap">
               {title.split("").map((char, i) => (
-                <span key={i} className="hero-char inline-block origin-bottom will-change-transform">{char}</span>
+                <span key={i} className="hero-char inline-block origin-bottom will-change-transform">
+                  {/* Convert actual spaces into non-breaking spaces so GSAP treats them as visible elements */}
+                  {char === " " ? "\u00A0" : char}
+                </span>
               ))}
             </div>
           </h1>
