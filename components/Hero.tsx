@@ -60,7 +60,6 @@ export default function Hero() {
 
       <div className="relative z-10 w-full flex-1 flex flex-col justify-between p-4 sm:p-6 md:p-12 pt-24 md:pt-28">
         
-        {/* Top Header Section */}
         <div className="flex justify-between items-start hero-fade">
            <div className="flex flex-col gap-2 md:gap-3">
              <div className="text-[10px] md:text-xs font-mono uppercase tracking-widest opacity-60">
@@ -87,12 +86,8 @@ export default function Hero() {
            </div>
         </div>
 
-        {/* Bottom Typography & Details Section */}
         <div className="relative mt-auto mb-4 md:mb-8">
-          
-          {/* Stacked Massive Typography - Resized to fit screen perfectly */}
           <div className="flex flex-col leading-[0.85] font-heading font-black tracking-tight uppercase mb-8 md:mb-10 w-full">
-            {/* Line 1: BUILDFORGE */}
             <div className="overflow-hidden">
               <div className="text-[12vw] sm:text-[9.5vw] md:text-[8.5vw] text-white whitespace-nowrap">
                 {"BUILDFORGE".split("").map((char, i) => (
@@ -101,7 +96,6 @@ export default function Hero() {
               </div>
             </div>
             
-            {/* Line 2: NETWORK (Hollow/Stroke text) */}
             <div className="overflow-hidden">
               <div className="text-[12vw] sm:text-[9.5vw] md:text-[8.5vw] text-transparent stroke-text whitespace-nowrap ml-1 md:ml-2">
                 {"NETWORK".split("").map((char, i) => (
@@ -112,27 +106,17 @@ export default function Hero() {
           </div>
           
           <div className="flex flex-col lg:flex-row lg:items-end justify-between border-t border-white/20 pt-6 md:pt-8 hero-fade gap-6 md:gap-8">
-            <div className="flex-1 max-w-3xl">
+            <div className="flex-1 max-w-4xl">
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-serif-italic text-gray-300 leading-snug mb-6 md:mb-8">
-                "Ideas are easy. Building them isn't. You don't need more vendors. You need one team that gets it."
+                "WE BUILD BRANDS. WE BUILD GROWTH. WE BUILD WHAT'S NEXT. An extended team for businesses that need strategy, creative and execution to move together."
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-[10px] md:text-xs font-mono uppercase tracking-wider opacity-70">
-                <div>
-                  <div className="text-white/40 mb-1">Wing 01</div>
-                  <div>Strategy</div>
-                </div>
-                <div>
-                  <div className="text-white/40 mb-1">Wing 02</div>
-                  <div>Brand</div>
-                </div>
-                <div>
-                  <div className="text-white/40 mb-1">Wing 03</div>
-                  <div>Marketing</div>
-                </div>
-                <div>
-                  <div className="text-white/40 mb-1">Wing 04</div>
-                  <div>Technology</div>
-                </div>
+              <div className="grid grid-cols-2 sm:grid-cols-6 gap-4 text-[10px] md:text-xs font-mono uppercase tracking-wider opacity-70">
+                <div><div className="text-white/40 mb-1">01</div><div>Strategy</div></div>
+                <div><div className="text-white/40 mb-1">02</div><div>Brand</div></div>
+                <div><div className="text-white/40 mb-1">03</div><div>Content</div></div>
+                <div><div className="text-white/40 mb-1">04</div><div>Marketing</div></div>
+                <div><div className="text-white/40 mb-1">05</div><div>Growth</div></div>
+                <div><div className="text-white/40 mb-1">06</div><div>Technology</div></div>
               </div>
             </div>
           </div>
