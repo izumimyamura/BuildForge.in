@@ -39,28 +39,26 @@ export default function Intro() {
         
         <div className="flex flex-col text-[7vw] md:text-[6vw] leading-[1.1] font-heading uppercase font-bold tracking-tight">
           <div className="intro-line-wrap overflow-hidden flex flex-wrap items-baseline gap-4">
-             <span className="char">Ideas</span>
-             <span className="char font-serif italic font-light text-gray-400 lowercase">are</span>
-             <span className="char">Easy.</span>
+             <span className="char">Start</span>
+             <span className="char font-serif italic font-light text-gray-400 lowercase">with the</span>
+             <span className="char">Problem.</span>
           </div>
 
           <div className="intro-line-wrap overflow-hidden flex flex-wrap items-baseline gap-4 pl-[5vw]">
-             <span className="char stroke-text text-transparent">Building</span>
-             <span className="char">Them</span>
-             <span className="char font-serif italic font-light text-white lowercase">isn't.</span>
+             <span className="char font-serif italic font-light text-white lowercase">then build the</span>
+             <span className="char stroke-text text-transparent">Work</span>
           </div>
 
           <div className="intro-line-wrap overflow-hidden flex flex-wrap items-baseline gap-4 mt-8">
-             <span className="char">One</span>
-             <span className="char font-serif italic font-light text-gray-400 lowercase">shared</span>
-             <span className="char">Understanding.</span>
+             <span className="char font-serif italic font-light text-gray-400 lowercase">around</span>
+             <span className="char">It.</span>
           </div>
         </div>
 
         <div className="mt-32 w-full flex justify-end">
           <div className="w-full md:w-1/2 text-lg md:text-xl font-light text-gray-400 font-mono leading-relaxed border-l border-gray-800 pl-8">
             <p>
-              Every growing business eventually needs more than one capability. Instead of managing multiple vendors for every problem, <span className="text-white italic font-serif">BuildForge Network</span> becomes an extended team around the business.
+              Insight ➔ Idea ➔ Creative ➔ Distribution ➔ Data ➔ <span className="text-white italic font-serif">Iteration.</span>
             </p>
           </div>
         </div>
