@@ -18,26 +18,31 @@ export default function Manifesto() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top top",
-        end: `+=${statements.length * 100}%`,
-        pin: true,
-        scrub: true,
-        onUpdate: (self) => {
-          const index = Math.floor(self.progress * (statements.length - 1));
-          
-          textRefs.current.forEach((el, i) => {
-             if (el) {
-               if (i === index) {
-                 gsap.to(el, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.5 });
-               } else {
-                 gsap.to(el, { opacity: 0, scale: 0.9, filter: 'blur(10px)', duration: 0.5 });
-               }
-             }
-          });
+      // Set initial states for everything but the first one
+      gsap.set(textRefs.current.slice(1), { opacity: 0, scale: 0.8, filter: 'blur(10px)' });
+      gsap.set(textRefs.current[0], { opacity: 1, scale: 1, filter: 'blur(0px)' });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: `+=${statements.length * 120}%`, // Gives plenty of scroll room
+          pin: true,
+          scrub: 1, // Smooth scrubbing
         }
       });
+
+      // Create a smooth cross-fade timeline for each statement
+      textRefs.current.forEach((el, i) => {
+        if (i > 0) {
+          tl.to(textRefs.current[i - 1], { opacity: 0, scale: 1.2, filter: 'blur(10px)', duration: 1 }, `step${i}`)
+            .to(el, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1 }, `step${i}`);
+        }
+      });
+      
+      // Add a little dead space at the end before unpinning
+      tl.to({}, { duration: 1 });
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -49,12 +54,12 @@ export default function Manifesto() {
          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-white rounded-full blur-[150px] animate-pulse"></div>
       </div>
 
-      <div className="relative z-10 container text-center">
+      <div className="relative z-10 container text-center h-full flex flex-col justify-center items-center">
          {statements.map((text, i) => (
            <h2 
              key={i}
              ref={el => textRefs.current[i] = el}
-             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-[6vw] md:text-[5vw] font-heading font-bold uppercase leading-tight mix-blend-difference ${i === 0 ? 'opacity-100' : 'opacity-0 scale-90 blur-sm'}`}
+             className="absolute w-full text-[6vw] md:text-[5vw] font-heading font-bold uppercase leading-tight mix-blend-difference"
            >
              {text}
            </h2>
