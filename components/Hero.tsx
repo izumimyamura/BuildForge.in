@@ -79,7 +79,7 @@ export default function Hero() {
                Global / Remote
              </div>
              <div className="flex gap-2 mt-2">
-               <a href="mailto:ceo@squadranlabs.in" className="px-4 h-8 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors text-xs">
+               <a href="mailto:ceo@buildforge.site" className="px-4 h-8 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors text-xs">
                  EMAIL
                </a>
              </div>
