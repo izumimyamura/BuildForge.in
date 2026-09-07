@@ -11,7 +11,8 @@ import Process from './components/Process';
 import Marquee from './components/Marquee';
 import CustomCursor from './components/CustomCursor';
 import Manifesto from './components/Manifesto';
-import Footer from './components/Footer'; // IMPORT ADDED HERE
+import Services from './components/Services'; // <-- IMPORTED SERVICES
+import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,10 +59,11 @@ export default function App() {
         <Intro />
         <Manifesto />
         <Process />
+        <Services /> {/* <-- ADDED SERVICES HERE */}
         <Marquee />
         <WorkGallery />
       </main>
-      <Footer /> {/* FOOTER ADDED HERE */}
+      <Footer />
     </div>
   );
 }
